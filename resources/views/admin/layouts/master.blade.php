@@ -46,7 +46,7 @@ The above copyright notice and this permission notice shall be included in all c
           </li>
 		   <li class="nav-item {{ (Request::path() == 'admin/category') ? 'active':'' }}">
             <a class="nav-link" href="{{ route('category.index') }}">
-              <i class="material-icons">library_books</i>
+              <i class="material-icons">category</i>
               <p>Category</p>
             </a>
           </li>
@@ -57,9 +57,9 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./tables.html">
-              <i class="material-icons">content_paste</i>
-              <p>Table List</p>
+            <a class="nav-link" href="{{ route('book.index') }}">
+              <i class="material-icons">book</i>
+              <p>Book</p>
             </a>
           </li>
          

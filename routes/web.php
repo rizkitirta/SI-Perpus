@@ -19,15 +19,20 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
-        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
         //Category
-        Route::get('/category', 'CategoryController@index')->name('category.index');
-        Route::get('/category/add', 'CategoryController@add')->name('category.add');
-        Route::post('/category/add', 'CategoryController@store')->name('category.store');
-        Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edit');
-        Route::put('/category/edit/{id}', 'CategoryController@update')->name('category.update');
-        Route::delete('/category/delete/{id}', 'CategoryController@delete')->name('category.delete');
+        Route::get('/category/list', 'Admin\CategoryController@index')->name('category.index');
+        Route::get('/category/add', 'Admin\CategoryController@add')->name('category.add');
+        Route::post('/category/add', 'Admin\CategoryController@store')->name('category.store');
+        Route::get('/category/edit/{id}', 'Admin\CategoryController@edit')->name('category.edit');
+        Route::put('/category/edit/{id}', 'Admin\CategoryController@update')->name('category.update');
+        Route::delete('/category/delete/{id}', 'Admin\CategoryController@delete')->name('category.delete');
+
+        //Book
+        Route::get('/book/list', 'Admin\BookController@index')->name('book.index');
+        Route::get('/book/add', 'Admin\BookController@add')->name('book.add');
+        Route::post('/book/add', 'Admin\BookController@store')->name('book.store');
 
     });
 

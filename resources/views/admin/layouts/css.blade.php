@@ -5,3 +5,6 @@
   <link href="{{ asset('material_dashboard/assets/css/material-dashboard.css?v=2.1.2') }}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('material_dashboard/assets/demo/demo.css') }}" rel="stylesheet" />
+  <!-- CSS Files -->
+<link href="{{ asset('material_dashboard/assets/css/material-dashboard.min.css?v=2.1.2') }}" rel="stylesheet" />
+
