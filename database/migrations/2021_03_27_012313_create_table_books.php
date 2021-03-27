@@ -15,9 +15,11 @@ class CreateTableBooks extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kategory');
             $table->string('judul');
+            $table->integer('kategory');
             $table->integer('stock');
+            $table->string('penulis');
+            $table->text('gambar');
             $table->text('keterangan');
             $table->timestamps();
 

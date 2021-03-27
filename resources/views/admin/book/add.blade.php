@@ -19,19 +19,23 @@
                         name="stock">
                 </div>
                 <div class="form-group">
-                    <label for="category">Example select</label>
+                    <label for="category">Category</label>
                     <select class="form-control" data-style="btn btn-link" id="category" name="category">
                         <option selected="" disabled="">Pilih Category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->nama_kategory }}</option>
+                            <option value="{{ $category->nama_kategory }}">{{ $category->nama_kategory }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group form-file-upload form-file-simple">
-                    <input type="text" class="form-control inputFileVisible" placeholder="Simple chooser...">
-                    <input type="file" class="inputFileHidden">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Default file input example</label>
+                    <input class="form-control" type="file" id="formFile" name="image">
                 </div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
             </form>
         </div>
     </div>
+
 @endsection

@@ -70,9 +70,9 @@ The above copyright notice and this permission notice shall be included in all c
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./map.html">
-              <i class="material-icons">location_ons</i>
-              <p>Maps</p>
+            <a class="nav-link" href="{{ route('logout')}}">
+              <i class="material-icons">logout</i>
+              <p>Logout</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -152,7 +152,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{ route('logout')}}">Log out</a>
+                  <a class="dropdown-item" href="">Log out</a>
                 </div>
               </li>
             </ul>
