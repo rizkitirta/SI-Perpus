@@ -17,6 +17,16 @@ class BookController extends Controller
         return view('admin.book.index', compact('books'));
     }
 
+    public function stock()
+    {
+        $books = DB::table('books as b')
+            ->join('categories as c', 'b.kategory', '=', 'c.id')
+            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
+            ->where('b.stock', '<', 1)
+            ->get();
+        return view('admin.book.index', compact('books'));
+    }
+
     public function add()
     {
         $categories = DB::table('categories')->get();

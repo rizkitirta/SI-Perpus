@@ -9,9 +9,10 @@
         </div>
     @endif
 
-    <p>
+    <div>
         <a href="javascript:history.back()" class="btn btn-sm btn-primary">back</a>
-    </p>
+        <a href="{{ route('book.stock') }}" class="btn btn-sm btn-default">Buku Stock Kosong</a>
+    </div>
 
     <div class="card">
         <div class="card-header card-header-primary">
@@ -46,6 +47,9 @@
                         </th>
                         <th>
                             Status
+                        </th>
+                        <th>
+                            On/Off
                         </th>
                         <th>
                             Created At
@@ -83,6 +87,15 @@
                                         class="badge {{ $book->status == 1 ? 'badge-success' : 'badge-danger' }}">{{ $book->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span>
                                 </td>
                                 <td>
+                                    @if ($book->status == 0)
+                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-default"><i
+                                                class="material-icons">toggle_off</i></a>
+                                    @else
+                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-success"><i
+                                                class="material-icons">toggle_on</i></a>
+                                    @endif
+                                </td>
+                                <td>
                                     {{ date('d-m-Y', strtotime($book->created_at)) }}
                                 </td>
                                 <td class="text-center">
@@ -90,13 +103,7 @@
                                             class="material-icons">edit</i></a>
                                     <a href="{{ route('book.delete', $book->id) }}"
                                         class="btn btn-sm btn-danger btn-delete"><i class="material-icons">delete</i></a>
-                                    @if ($book->status == 1)
-                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-danger"><i
-                                                class="material-icons">toggle_off</i></a>
-                                    @else
-                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-success"><i
-                                                class="material-icons">toggle_on</i></a>
-                                    @endif
+                                    
                                 </td>
                             </tr>
                         @endforeach
