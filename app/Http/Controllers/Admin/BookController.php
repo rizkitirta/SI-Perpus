@@ -97,4 +97,11 @@ class BookController extends Controller
 
         return redirect(route('book.index'))->with('success', 'Buku Berhasil Diupdate');
     }
+
+    public function delete($id)
+    {
+        
+        DB::table('books')->where('id',$id)->delete();
+        return redirect(route('book.index'))->with('success', 'Buku Berhasil Dihapus');
+    }
 }
