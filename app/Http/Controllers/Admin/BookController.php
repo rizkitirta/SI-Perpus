@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = DB::table('books')->get();
-        return view('admin.book.index',compact('books'));
+        $books = DB::table('books as b')
+            ->join('categories as c', 'b.kategory', '=', 'c.id')
+            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'c.nama_kategory')
+            ->get();
+        return view('admin.book.index', compact('books'));
     }
 
     public function add()
     {
         $categories = DB::table('categories')->get();
-        return view('admin.book.add',compact('categories'));
+        return view('admin.book.add', compact('categories'));
     }
 
     public function store(Request $request)
@@ -28,7 +30,8 @@ class BookController extends Controller
             'keterangan' => 'required',
             'stock' => 'required',
             'category' => 'required',
-            'image' => 'required|mimes:jpeg,png,gif'
+            'penulis' => 'required',
+            'image' => 'required|mimes:jpeg,png,gif',
         ]);
 
         $file = $request->file('image');
@@ -39,13 +42,59 @@ class BookController extends Controller
             'judul' => $request->judul,
             'keterangan' => $request->keterangan,
             'stock' => $request->stock,
-            'category' => $request->category,
-            'penulis' => Auth::user()->id,
+            'kategory' => $request->category,
+            'penulis' => $request->penulis,
             'gambar' => $file->getClientOriginalName(),
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        return redirect(route('book.index'))->with('success','Buku Berhasil Ditambahkan');
+        return redirect(route('book.index'))->with('success', 'Buku Berhasil Ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $book = DB::table('books')->where('id', $id)->first();
+        $categories = DB::table('categories')->get();
+        return view('admin.book.edit', compact('categories', 'book'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'judul' => 'required',
+            'keterangan' => 'required',
+            'stock' => 'required',
+            'category' => 'required',
+            'penulis' => 'required',
+            'image' => 'mimes:jpeg,png,gif',
+        ]);
+
+        $file = $request->file('image');
+        if ($file) {
+            $destinationPath = 'uploads';
+            $file->move($destinationPath, $file->getClientOriginalName());
+
+            DB::table('books')->where('id', $id)->update([
+                'judul' => $request->judul,
+                'keterangan' => $request->keterangan,
+                'stock' => $request->stock,
+                'kategory' => $request->category,
+                'penulis' => $request->penulis,
+                'gambar' => $file->getClientOriginalName(),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+
+        } else {
+            DB::table('books')->where('id', $id)->update([
+                'judul' => $request->judul,
+                'keterangan' => $request->keterangan,
+                'stock' => $request->stock,
+                'kategory' => $request->category,
+                'penulis' => $request->penulis,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+        }
+
+        return redirect(route('book.index'))->with('success', 'Buku Berhasil Diupdate');
     }
 }

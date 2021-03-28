@@ -206,8 +206,8 @@ The above copyright notice and this permission notice shall be included in all c
       </footer>
     </div>
   </div>
-
  @include('admin.layouts.script')
+ @yield('script')
 </body>
 
 </html>

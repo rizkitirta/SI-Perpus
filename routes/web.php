@@ -34,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/book/add', 'Admin\BookController@add')->name('book.add');
         Route::post('/book/add', 'Admin\BookController@store')->name('book.store');
 
+
+        Route::get('/book/edit/{id}', 'Admin\BookController@edit')->name('book.edit');
+        Route::post('/book/edit/{id}', 'Admin\BookController@update')->name('book.update');
+
     });
 
 });

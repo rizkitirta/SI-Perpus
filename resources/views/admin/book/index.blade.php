@@ -9,6 +9,10 @@
         </div>
     @endif
 
+    <p>
+        <a href="javascript:history.back()" class="btn btn-sm btn-primary">back</a>
+    </p>
+
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title "></h4>
@@ -31,41 +35,59 @@
                         <th>
                             Penulis
                         </th>
-						<th>
-							Stock
-						</th>
-						<th>
-							Created At
-						</th>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Keterangan
+                        </th>
+                        <th>
+                            Stock
+                        </th>
+                        <th>
+                            Created At
+                        </th>
+                        <th class="text-center">
+                            Action
+                        </th>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($books as $e => $book)
+                        @foreach ($books as $e => $book)
                             <tr>
                                 <td>
                                     {{ $e + 1 }}
                                 </td>
-								<td>
-                                    {{ $book->gambar }}
+                                <td>
+                                    <img src="{{ asset('uploads/' . $book->gambar) }}" alt="gambar" style="width: 70px">
                                 </td>
                                 <td>
                                     {{ $book->judul }}
                                 </td>
-								<td>
+                                <td>
+                                    {{ $book->penulis }}
+                                </td>
+                                <td>
+                                    {{ $book->nama_kategory }}
+                                </td>
+                                <td>
                                     {{ $book->keterangan }}
+                                </td>
+                                <td>
+                                    {{ $book->stock }}
                                 </td>
                                 <td>
                                     {{ date('d-m-Y', strtotime($book->created_at)) }}
                                 </td>
-                                <td>
-                                    <a class="btn btn-sm btn-primary"
-                                        href="{{ route('book.edit', $books->id) }}">Edit</a>
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('book.edit', $book->id) }}"><i
+                                            class="material-icons">edit</i></a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                         data-target="#delete">
-                                        Delete
+                                        <i class="material-icons">delete</i>
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -76,8 +98,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,14 +111,14 @@
                     Hapus Data?
                 </div>
                 <div class="modal-footer">
-					<form action="" method="post">
+                    <form action="" method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
                         <button type="submit" class="btn btn-sm btn-primary">Oke</button>
-						<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
                     </form>
-                    
-                    
+
+
                 </div>
             </div>
         </div>

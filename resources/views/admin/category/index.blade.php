@@ -32,65 +32,77 @@
                             Action
                         </th>
                     </thead>
-                    <tbody>
-                        @foreach ($categories as $e => $category)
-                            <tr>
-                                <td>
-                                    {{ $e + 1 }}
-                                </td>
-                                <td>
-                                    {{ $category->nama_kategory }}
-                                </td>
-                                <td>
-                                    {{ date('d-m-Y', strtotime($category->created_at)) }}
-                                </td>
-                                <td>
-                                    <a class="btn btn-sm btn-primary"
-                                        href="{{ route('category.edit', $category->id) }}">Edit</a>
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#delete">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                    @if ($categories)
+                        <tbody>
+                            @foreach ($categories as $e => $category)
+                                <tr>
+                                    <td>
+                                        {{ $e + 1 }}
+                                    </td>
+                                    <td>
+                                        {{ $category->nama_kategory }}
+                                    </td>
+                                    <td>
+                                        {{ date('d-m-Y', strtotime($category->created_at)) }}
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a href="{{ route('category.edit', $category->id) }}"
+                                            class="btn btn-sm btn-primary"><i class="far fa-edit"></i> Edit</a>
+                                        <a href="{{ route('category.delete', $category->id) }}"
+                                            class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i>
+                                            Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @endif
+
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
+<!-- Modal -->
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Message</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Hapus Data?
+                    Apakah Anda Yakin?
                 </div>
+
                 <div class="modal-footer">
-					<form action="{{ route('category.delete', $category->id) }}" method="post">
+                    <form action="" method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
-                        <button type="submit" class="btn btn-sm btn-primary">Oke</button>
-						<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-white">Ok, Got it</button>
                     </form>
-                    
-                    
+                    <button type="button" class="btn btn-link -auto" data-dismiss="modal">Close</button>
                 </div>
+
             </div>
         </div>
     </div>
+
 @endsection
 @section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
 
+            $('body').on('click', '.btn-delete', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $('#modal-delete').find('form').attr('action', url);
+                $('#modal-delete').modal();
+            });
+
+        })
+
+    </script>
 @endsection
