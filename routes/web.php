@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
         //Book
         Route::get('/book/list', 'Admin\BookController@index')->name('book.index');
         Route::get('/book/list/stock', 'Admin\BookController@stock')->name('book.stock');
+        Route::get('/book/list/active', 'Admin\BookController@active')->name('book.active');
+        Route::get('/book/list/non-active', 'Admin\BookController@NonActive')->name('book.NonActive');
         Route::get('/book/add', 'Admin\BookController@add')->name('book.add');
         Route::post('/book/add', 'Admin\BookController@store')->name('book.store');
 

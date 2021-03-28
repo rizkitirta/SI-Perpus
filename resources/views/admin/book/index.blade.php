@@ -11,7 +11,10 @@
 
     <div>
         <a href="javascript:history.back()" class="btn btn-sm btn-primary">back</a>
+        <a href="{{ route('book.index') }}" class="btn btn-sm btn-default">All</a>
         <a href="{{ route('book.stock') }}" class="btn btn-sm btn-default">Buku Stock Kosong</a>
+        <a href="{{ route('book.active') }}" class="btn btn-sm btn-default">Buku Aktive</a>
+        <a href="{{ route('book.NonActive') }}" class="btn btn-sm btn-default">Buku Non Aktive</a>
     </div>
 
     <div class="card">
@@ -84,7 +87,7 @@
                                 </td>
                                 <td>
                                     <span
-                                        class="badge {{ $book->status == 1 ? 'badge-success' : 'badge-danger' }}">{{ $book->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span>
+                                        class="badge {{ $book->status == 1 ? 'badge-success' : 'badge-danger' }}">{{ $book->status == 1 ? 'Aktive' : 'Non Active' }}</span>
                                 </td>
                                 <td>
                                     @if ($book->status == 0)
@@ -103,7 +106,7 @@
                                             class="material-icons">edit</i></a>
                                     <a href="{{ route('book.delete', $book->id) }}"
                                         class="btn btn-sm btn-danger btn-delete"><i class="material-icons">delete</i></a>
-                                    
+
                                 </td>
                             </tr>
                         @endforeach
