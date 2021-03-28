@@ -20,6 +20,7 @@ class CreateTableBooks extends Migration
             $table->integer('stock');
             $table->string('penulis');
             $table->text('gambar');
+            $table->integer('status')->default(1);
             $table->text('keterangan');
             $table->timestamps();
 

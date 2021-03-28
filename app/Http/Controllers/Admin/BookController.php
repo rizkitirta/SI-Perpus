@@ -12,7 +12,7 @@ class BookController extends Controller
     {
         $books = DB::table('books as b')
             ->join('categories as c', 'b.kategory', '=', 'c.id')
-            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'c.nama_kategory')
+            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
             ->get();
         return view('admin.book.index', compact('books'));
     }
@@ -100,8 +100,27 @@ class BookController extends Controller
 
     public function delete($id)
     {
-        
-        DB::table('books')->where('id',$id)->delete();
+
+        DB::table('books')->where('id', $id)->delete();
         return redirect(route('book.index'))->with('success', 'Buku Berhasil Dihapus');
+    }
+
+    public function status($id)
+    {
+        $data = DB::table('books')->where('id', $id)->first();
+        $status = $data->status;
+
+        if ($status == 1) {
+            DB::table('books')->where('id', $id)->update([
+                'status' => 0,
+            ]);
+        } else {
+            DB::table('books')->where('id', $id)->update([
+                'status' => 1,
+            ]);
+        }
+
+        return redirect(route('book.index'))->with('success', 'Status Berhasil Diubah');
+
     }
 }

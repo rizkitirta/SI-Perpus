@@ -45,6 +45,9 @@
                             Stock
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             Created At
                         </th>
                         <th class="text-center">
@@ -76,14 +79,24 @@
                                     {{ $book->stock }}
                                 </td>
                                 <td>
+                                    <span
+                                        class="badge {{ $book->status == 1 ? 'badge-success' : 'badge-danger' }}">{{ $book->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span>
+                                </td>
+                                <td>
                                     {{ date('d-m-Y', strtotime($book->created_at)) }}
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-sm btn-primary" href="{{ route('book.edit', $book->id) }}"><i
                                             class="material-icons">edit</i></a>
                                     <a href="{{ route('book.delete', $book->id) }}"
-                                    class="btn btn-sm btn-danger btn-delete"><i
-                                            class="material-icons">delete</i></a>
+                                        class="btn btn-sm btn-danger btn-delete"><i class="material-icons">delete</i></a>
+                                    @if ($book->status == 1)
+                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-danger"><i
+                                                class="material-icons">toggle_off</i></a>
+                                    @else
+                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-success"><i
+                                                class="material-icons">toggle_on</i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -132,5 +145,6 @@
             });
 
         })
+
     </script>
 @endsection

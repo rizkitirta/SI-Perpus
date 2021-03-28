@@ -118,7 +118,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="">Log out</a>
+                  <a class="dropdown-item" href="{{ route('logout') }}">Log out</a>
                 </div>
               </li>
             </ul>
