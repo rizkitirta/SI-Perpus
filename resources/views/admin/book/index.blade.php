@@ -80,7 +80,9 @@
                                     <img src="{{ asset('uploads/' . $book->gambar) }}" alt="gambar" style="width: 70px">
                                 </td>
                                 <td>
-                                    <a href="{{ route('pinjam.buku',$book->id) }}" class="btn btn-sm btn-primary {{ ($book->stock < 1 || $book->status < 1 ) ? 'disabled' : ''}}" >Pinjam</a>
+                                    <a href="{{ route('pinjam.buku', $book->id) }}"
+                                        class="btn btn-sm btn-success 
+                                        {{ $book->stock < 1 || $book->status < 1 ? 'disabled' : '' }}">Pinjam</a>
                                 </td>
                                 <td>
                                     {{ $book->judul }}
