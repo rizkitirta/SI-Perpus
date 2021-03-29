@@ -91,7 +91,7 @@
                                     {{ $book->penulis }}
                                 </td>
                                 <td>
-                                    {{ $book->nama_kategory }}
+                                    {{ $book->category->nama_kategory }}
                                 </td>
                                 <td>
                                     {{ $book->keterangan }}

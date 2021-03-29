@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Buku;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -11,43 +12,48 @@ class BookController extends Controller
     public function index()
     {
         $breadcrumb = 'All-Book';
-        $books = DB::table('books as b')
-            ->join('categories as c', 'b.kategory', '=', 'c.id')
-            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
-            ->get();
+        // $books = DB::table('books as b')
+        //     ->join('categories as c', 'b.kategory', '=', 'c.id')
+        //     ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
+        //     ->get();
+
+        $books = Buku::get();
         return view('admin.book.index', compact('books','breadcrumb'));
     }
 
     public function stock()
     {
         $breadcrumb = 'Stock-Kosong';
-        $books = DB::table('books as b')
-            ->join('categories as c', 'b.kategory', '=', 'c.id')
-            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
-            ->where('b.stock', '<', 1)
-            ->get();
+        // $books = DB::table('books as b')
+        //     ->join('categories as c', 'b.kategory', '=', 'c.id')
+        //     ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
+        //     ->where('b.stock', '<', 1)
+        //     ->get();
+        $books = Buku::where('stock','<',1)->get();
         return view('admin.book.index', compact('books','breadcrumb'));
     }
 
     public function active()
     {
         $breadcrumb = 'Active-Book';
-        $books = DB::table('books as b')
-            ->join('categories as c', 'b.kategory', '=', 'c.id')
-            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
-            ->where('b.status', '=', 1)
-            ->get();
+        // $books = DB::table('books as b')
+        //     ->join('categories as c', 'b.kategory', '=', 'c.id')
+        //     ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
+        //     ->where('b.status', '=', 1)
+        //     ->get();
+        $books = Buku::where('status','=',1)->get();
         return view('admin.book.index', compact('books','breadcrumb'));
     }
 
     public function NonActive()
     {
         $breadcrumb = 'Non-Active-Book';
-        $books = DB::table('books as b')
-            ->join('categories as c', 'b.kategory', '=', 'c.id')
-            ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
-            ->where('b.status', '=', 0)
-            ->get();
+        // $books = DB::table('books as b')
+        //     ->join('categories as c', 'b.kategory', '=', 'c.id')
+        //     ->select('b.id', 'b.gambar', 'b.judul', 'b.penulis', 'b.stock', 'b.created_at', 'b.keterangan', 'b.status', 'c.nama_kategory')
+        //     ->where('b.status', '=', 0)
+        //     ->get();
+        $books = Buku::where('status', '=', 0)->get();
         return view('admin.book.index', compact('books','breadcrumb'));
     }
 
