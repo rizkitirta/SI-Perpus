@@ -12,9 +12,9 @@
     <div>
         <a href="javascript:history.back()" class="btn btn-sm btn-primary">back</a>
         <a href="{{ route('book.index') }}" class="btn btn-sm btn-default">All</a>
-        <a href="{{ route('book.stock') }}" class="btn btn-sm btn-default">Buku Stock Kosong</a>
         <a href="{{ route('book.active') }}" class="btn btn-sm btn-default">Buku Aktive</a>
         <a href="{{ route('book.NonActive') }}" class="btn btn-sm btn-default">Buku Non Aktive</a>
+        <a href="{{ route('book.stock') }}" class="btn btn-sm btn-default">Buku Stock Kosong</a>
     </div>
 
     <div class="card">
@@ -32,6 +32,9 @@
                         </th>
                         <th>
                             Gambar
+                        </th>
+                        <th>
+                            Peminjaman
                         </th>
                         <th>
                             Judul
@@ -69,6 +72,9 @@
                                 </td>
                                 <td>
                                     <img src="{{ asset('uploads/' . $book->gambar) }}" alt="gambar" style="width: 70px">
+                                </td>
+                                <td>
+                                    <a href="{{ route('pinjam.buku',$book->id) }}" class="btn btn-sm btn-primary">Pinjam</a>
                                 </td>
                                 <td>
                                     {{ $book->judul }}

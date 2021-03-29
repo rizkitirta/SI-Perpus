@@ -43,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/book/edit/{id}', 'Admin\BookController@delete')->name('book.delete');
         Route::get('/book/status/{id}', 'Admin\BookController@status')->name('book.status');
 
+        //Peminjaman
+        Route::get('/peminjaman/{id}','Admin\PeminjamanController@store')->name('pinjam.buku');
+
     });
 
 });

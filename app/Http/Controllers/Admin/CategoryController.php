@@ -11,13 +11,16 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $breadcrumb = 'Category';
         $categories = DB::table('categories')->orderBy('id','desc')->get();
-        return view('admin.category.index',compact('categories'));
+        return view('admin.category.index',compact('categories','breadcrumb'));
     }
 
     public function add()
     {
-        return view('admin.category.add');
+        $breadcrumb = 'Add-Category';
+
+        return view('admin.category.add',compact('breadcrumb'));
     }
 
     public function store(Request $request)
@@ -37,8 +40,10 @@ class CategoryController extends Controller
 
      public function edit($id)
     {
+        $breadcrumb = 'Edit-Category';
+
         $category = DB::table('categories')->where('id',$id)->first();
-        return view('admin.category.edit',compact('category'));
+        return view('admin.category.edit',compact('category','breadcrumb'));
     }
 
     public function update(Request $request,$id)
