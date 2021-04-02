@@ -44,28 +44,28 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::path() == 'admin/category' ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::path() == 'admin/category/list' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('category.index') }}">
                             <i class="material-icons">category</i>
                             <p>Category</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ Request::path() == 'admin/book/list' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('book.index') }}">
                             <i class="material-icons">book</i>
                             <p>Book</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./user.html">
+                    <li class="nav-item {{ Request::path() == 'admin/peminjaman' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('index.pinjam.buku') }}">
                             <i class="material-icons">person</i>
-                            <p>User Profile</p>
+                            <p>Peminjaman</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./icons.html">
+                    <li class="nav-item {{ Request::path() == 'admin/pengembalian-buku' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('pengembalian.index') }}">
                             <i class="material-icons">bubble_chart</i>
-                            <p>Icons</p>
+                            <p>Pengembalian</p>
                         </a>
                     </li>
                     <li class="nav-item ">

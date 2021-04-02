@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Category')
+@section('title', 'Peminjaman')
 @section('content')
 
     @if (session('success'))
@@ -23,34 +23,56 @@
                             #
                         </th>
                         <th>
-                            Name
+                            Peminjam
+                        </th>
+                        <th>
+                            Buku
                         </th>
                         <th>
                             Created At
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             Action
                         </th>
                     </thead>
-                    <tbody  class="text-center">
-                        @foreach ($categories as $e => $category)
+                    <tbody class="text-center">
+                        @foreach ($data as $e => $dt)
                             <tr>
                                 <td>
                                     {{ $e + 1 }}
                                 </td>
                                 <td>
-                                    {{ $category->nama_kategory }}
+                                    {{ $dt->user_r->name }}
                                 </td>
                                 <td>
-                                    {{ date('d-m-Y', strtotime($category->created_at)) }}
+                                    {{ $dt->buku_r->judul }}
                                 </td>
-
                                 <td>
-                                    <a href="{{ route('category.edit', $category->id) }}"
-                                        class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a></a>
-                                    <a href="{{ route('category.delete', $category->id) }}"
-                                        class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"><i
-                                                class="material-icons">delete</i></a></a>
+                                    {{ date('d-m-Y', strtotime($dt->created_at)) }}
+                                </td>
+                                <td>
+                                   @if ($dt->status == 1)
+                                       <span class="badge badge-success">Disetujui</span>
+                                   @elseif ($dt->status == 2)   
+                                         <span class="badge badge-danger">Ditolak</span>    
+                                    @else
+                                    <span class="badge badge-warning">Belum Disetujui</span>                         
+                                   @endif
+                                </td>
+                                <td>
+                                    @if ($dt->status == null)
+                                        <a href="{{ route('setujui.peminjaman', $dt->id) }}"
+                                            class="btn btn-sm btn-success"><i
+                                                class="material-icons">check</i></a>
+                                        <a href="{{ route('tolak.peminjaman', $dt->id) }}"
+                                            class="btn btn-sm btn-danger">X</a>
+                                    @elseif ($dt->status == 1 || $dt->status == 2)
+                                        <a href="{{ route('batalkan.peminjaman', $dt->id) }}"
+                                            class="btn btn-sm btn-danger">Batalkan</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

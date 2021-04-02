@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Category')
+@section('title', 'Pengembalian')
 @section('content')
 
     @if (session('success'))
@@ -12,8 +12,7 @@
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title "></h4>
-            <p class="card-category">Mangement Category</p>
-            <a href="{{ route('category.add') }}" class="btn btn-sm btn-warning">Tambah Category</a>
+            <p class="card-category">Pengembalian</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -26,31 +25,40 @@
                             Name
                         </th>
                         <th>
-                            Created At
+                            Buku
+                        </th>
+                        <th>
+                            Status
                         </th>
                         <th>
                             Action
                         </th>
                     </thead>
-                    <tbody  class="text-center">
-                        @foreach ($categories as $e => $category)
+                    <tbody class="text-center">
+                        @foreach ($data as $e => $dt)
                             <tr>
                                 <td>
                                     {{ $e + 1 }}
                                 </td>
                                 <td>
-                                    {{ $category->nama_kategory }}
+                                    {{ $dt->user_r->name }}
                                 </td>
                                 <td>
-                                    {{ date('d-m-Y', strtotime($category->created_at)) }}
+                                    {{ $dt->buku_r->judul }}
+                                </td>
+                                <td>
+                                    @if ($dt->status == 1)
+                                        <label for="" class="badge badge-success">Dipinjam</label>
+                                    @else
+                                        <label for="" class="badge badge-danger">Dikembalikan</label>
+                                    @endif
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('category.edit', $category->id) }}"
-                                        class="btn btn-sm btn-primary"><i class="material-icons">edit</i></a></a>
-                                    <a href="{{ route('category.delete', $category->id) }}"
-                                        class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"><i
-                                                class="material-icons">delete</i></a></a>
+                                    <a href="{{ route('pengembalian.buku', $dt->id) }}"
+                                        class="btn btn-sm btn-primary {{ $dt->status == 3 ? 'disabled' : '' }}">Kembalikan</a>
+									<a href="{{ route('hapus.riwayat', $dt->id) }}"
+                                        class="btn btn-sm btn-default {{ $dt->status == 1 ? 'disabled' : '' }}">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

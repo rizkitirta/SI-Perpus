@@ -44,7 +44,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/book/status/{id}', 'Admin\BookController@status')->name('book.status');
 
         //Peminjaman
+        Route::get('/peminjaman','Admin\PeminjamanController@index')->name('index.pinjam.buku');
         Route::get('/peminjaman/{id}','Admin\PeminjamanController@store')->name('pinjam.buku');
+        Route::get('/peminjaman/peretujuan/{id}','Admin\PeminjamanController@setujui')->name('setujui.peminjaman');
+        Route::get('/peminjaman/pembatalan/{id}','Admin\PeminjamanController@batalkan')->name('batalkan.peminjaman');
+        Route::get('/peminjaman/penolakan/{id}','Admin\PeminjamanController@tolak')->name('tolak.peminjaman');
+
+        Route::get('pengembalian-buku', 'Admin\PengembalianController@index')->name('pengembalian.index');
+        Route::get('pengembalian-buku/{id}', 'Admin\PengembalianController@pengembalian')->name('pengembalian.buku');
+        Route::get('pengembalian-buku/delete/{id}', 'Admin\PengembalianController@clear_riwayat')->name('hapus.riwayat');
 
     });
 
