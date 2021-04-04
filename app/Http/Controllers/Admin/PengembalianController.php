@@ -37,7 +37,7 @@ class PengembalianController extends Controller
 
     public function clear_riwayat($id)
     {
-        Peminjaman::findOrFail($id)->delete();
+        Peminjaman::where('status',3)->delete();
         return back()->with('success','Data Berhasil Dihapus');
     }
 }

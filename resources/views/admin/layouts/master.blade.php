@@ -68,6 +68,12 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Pengembalian</p>
                         </a>
                     </li>
+                    <li class="nav-item {{ Request::path() == 'admin/anggota-perpustakaan' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('anggota.index') }}">
+                            <i class="material-icons">persons</i>
+                            <p>Anggota</p>
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('logout') }}">
                             <i class="material-icons">logout</i>

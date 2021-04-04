@@ -54,6 +54,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pengembalian-buku/{id}', 'Admin\PengembalianController@pengembalian')->name('pengembalian.buku');
         Route::get('pengembalian-buku/delete/{id}', 'Admin\PengembalianController@clear_riwayat')->name('hapus.riwayat');
 
+        Route::get('anggota-perpustakaan','Admin\AnggotaController@index')->name('anggota.index');
+        Route::get('anggota-perpustakaan/add','Admin\AnggotaController@add')->name('anggota.add');
+        Route::post('anggota-perpustakaan/add','Admin\AnggotaController@store')->name('anggota.store');
+        Route::get('anggota-perpustakaan/edit/{id}', 'Admin\AnggotaController@edit')->name('anggota.edit');
+        Route::put('anggota-perpustakaan/edit/{id}', 'Admin\AnggotaController@update')->name('anggota.update');
+        Route::delete('anggota-perpustakaan/delete/{id}', 'Admin\AnggotaController@delete')->name('anggota.delete');
+
+
     });
 
 });
