@@ -34,7 +34,7 @@ class PeminjamanController extends Controller
                 'stock' => $new_stock
             ]);
 
-            return redirect(route('book.index'))->with('success', 'Buku Berhasil Dipinjam!');
+            return back()->with('success', 'Buku Berhasil Dipinjam!');
 
         } else {
             return redirect(route('book.index'))->with('gagal', 'Buku Gagal Dipinjam!');

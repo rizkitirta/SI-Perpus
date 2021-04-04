@@ -17,17 +17,11 @@
 
     <div>
         <a href="javascript:history.back()" class="btn btn-sm btn-primary">back</a>
-        <a href="{{ route('book.index') }}" class="btn btn-sm btn-default">All</a>
-        <a href="{{ route('book.active') }}" class="btn btn-sm btn-default">Buku Aktive</a>
-        <a href="{{ route('book.NonActive') }}" class="btn btn-sm btn-default">Buku Non Aktive</a>
-        <a href="{{ route('book.stock') }}" class="btn btn-sm btn-default">Buku Stock Kosong</a>
     </div>
 
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title "></h4>
-            <p class="card-category">Mangement Buku</p>
-            <a href="{{ route('book.add') }}" class="btn btn-sm btn-warning">Tambah Buku</a>
+            <h4 class="card-title ">Semua Buku</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -43,32 +37,17 @@
                             Judul
                         </th>
                         <th>
-                            Penulis
-                        </th>
-                        <th>
-                            Category
-                        </th>
-                        <th>
-                            Keterangan
-                        </th>
-                        <th>
                             Stock
                         </th>
                         <th>
                             Status
-                        </th>
-                        <th>
-                            On/Off
-                        </th>
-                        <th>
-                            Created At
-                        </th>
+						</th>
                         <th class="text-center">
                             Action
                         </th>
                     </thead>
                     <tbody>
-                        @foreach ($books as $e => $book)
+                        @foreach ($data as $e => $book)
                             <tr>
                                 <td>
                                     {{ $e + 1 }}
@@ -76,17 +55,9 @@
                                 <td>
                                     <img src="{{ asset('uploads/' . $book->gambar) }}" alt="gambar" style="width: 70px">
                                 </td>
+                                
                                 <td>
                                     {{ $book->judul }}
-                                </td>
-                                <td>
-                                    {{ $book->penulis }}
-                                </td>
-                                <td>
-                                    {{ $book->category_r->nama_kategory }}
-                                </td>
-                                <td>
-                                    {{ $book->keterangan }}
                                 </td>
                                 <td>
                                     {{ $book->stock }}
@@ -95,24 +66,12 @@
                                     <span
                                         class="badge {{ $book->status == 1 ? 'badge-success' : 'badge-danger' }}">{{ $book->status == 1 ? 'Aktive' : 'Non Active' }}</span>
                                 </td>
-                                <td>
-                                    @if ($book->status == 0)
-                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-default"><i
-                                                class="material-icons">toggle_off</i></a>
-                                    @else
-                                        <a href="{{ route('book.status', $book->id) }}" class="btn btn-sm btn-success"><i
-                                                class="material-icons">toggle_on</i></a>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{ date('d-m-Y', strtotime($book->created_at)) }}
-                                </td>
                                 <td class="text-center">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('book.edit', $book->id) }}"><i
-                                            class="material-icons">edit</i></a>
-                                    <a href="{{ route('book.delete', $book->id) }}"
-                                        class="btn btn-sm btn-danger btn-delete"><i class="material-icons">delete</i></a>
-
+                                  
+                                    <a href="{{ route('pinjam.buku', $book->id) }}"
+                                        class="btn btn-sm btn-success 
+                                        {{ $book->stock < 1 || $book->status < 1 ? 'disabled' : '' }}">Pinjam</a>
+                                
                                 </td>
                             </tr>
                         @endforeach

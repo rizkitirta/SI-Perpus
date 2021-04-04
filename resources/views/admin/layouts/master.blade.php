@@ -38,7 +38,8 @@ The above copyright notice and this permission notice shall be included in all c
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item {{ Request::path() == 'admin/dashboard' ? 'active' : '' }} ">
+                    @if (Auth::user()->status == 1)
+                        <li class="nav-item {{ Request::path() == 'admin/dashboard' ? 'active' : '' }} ">
                         <a class="nav-link" href="{{ route('dashboard') }}">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
@@ -74,12 +75,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Anggota</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ route('logout') }}">
-                            <i class="material-icons">logout</i>
-                            <p>Logout</p>
-                        </a>
-                    </li>
+                    @endif
                     <li class="nav-item ">
                         <a class="nav-link" href="./notifications.html">
                             <i class="material-icons">notifications</i>
@@ -87,17 +83,12 @@ The above copyright notice and this permission notice shall be included in all c
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./rtl.html">
-                            <i class="material-icons">language</i>
-                            <p>RTL Support</p>
+                        <a class="nav-link" href="{{ route('logout') }}">
+                            <i class="material-icons">logout</i>
+                            <p>Logout</p>
                         </a>
                     </li>
-                    <li class="nav-item active-pro ">
-                        <a class="nav-link" href="./upgrade.html">
-                            <i class="material-icons">unarchive</i>
-                            <p>Upgrade to PRO</p>
-                        </a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>

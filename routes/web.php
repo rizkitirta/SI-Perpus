@@ -16,6 +16,11 @@ Route::get('/', function () {
 });
 Auth::routes();
 
+Route::get('user/index', 'User\UserController@index')->name('user.index');
+Route::get('user/index/my-book', 'User\UserController@mybook')->name('user.mybook');
+Route::get('user/index/koleksi-buku', 'User\UserController@koleksi')->name('user.koleksi');
+
+
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
@@ -61,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('anggota-perpustakaan/edit/{id}', 'Admin\AnggotaController@update')->name('anggota.update');
         Route::delete('anggota-perpustakaan/delete/{id}', 'Admin\AnggotaController@delete')->name('anggota.delete');
 
-
+        
     });
 
 });
