@@ -18,4 +18,9 @@ class Peminjaman extends Model
     {
         return $this->belongsTo('App\User','user');
     }
+
+    public function status_r()
+    {
+        return $this->belongsTo('App\Models\Status','status','code')->withDefault(['name' => 'Menunggu']);
+    }
 }

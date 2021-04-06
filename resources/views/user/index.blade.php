@@ -2,10 +2,10 @@
 @section('title', 'User')
 @section('content')
 
-<div class="card text-center ">
+    <div class="card text-center ">
         <h3 style="font-weight:bold;">Perpustakaan</h3>
         <h4 style="font-weight:bold;">SMP NEGERI 07 KOTABUMI</h4>
-</div>
+    </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -13,9 +13,9 @@
                     <div class="card-icon">
                         <i class="material-icons">book</i>
                     </div>
-                    <p class="card-category">My Book</p>
+                    <p class="card-category">Buku Saya</p>
                     <h3 class="card-title">{{ $mybook }}
-                        <small>Buku</small> 
+                        <small>Buku</small>
                     </h3><br>
                 </div>
                 <div class="card-footer">
@@ -35,7 +35,7 @@
                     <h3 class="card-title">{{ $totalBuku }}</h3>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('user.koleksi') }}">Get more</a>
+                    <a href="{{ route('user.peminjaman') }}">Get more</a>
                 </div>
             </div>
         </div>

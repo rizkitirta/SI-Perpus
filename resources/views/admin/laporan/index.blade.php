@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Peminjaman')
+@section('title', 'Laporan')
 @section('content')
 
     @if (session('success'))
@@ -12,9 +12,36 @@
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title "></h4>
-            <p class="card-category">Mangement Peminjaman</p>
+            <p class="card-category">Mangement Laporan</p>
         </div>
         <div class="card-body">
+			<form method="get" action="{{ route('laporan.periode') }}">
+                <div class="row">
+                    <div class="col">
+						<label for="">Tanggal Awal</label>
+                        <input type="date" class="form-control" autocomplete="off" name="tgl_awal">
+                    </div>
+                    <div class="col">
+						<label for="">Tanggal Akhir</label>
+                        <input type="date" class="form-control" autocomplete="off" name="tgl_akhir">
+                    </div>
+                    <div class="col">
+						<label for="user">User</label>
+                        <select name="user" id="user" class="form-control">
+							<option selected disabled>Pilih User</option>
+							<option value="all">All Anggota</option>
+							@foreach ($users as $user)
+								<option value="{{ $user->id }}">{{ $user->name }}</option>
+							@endforeach
+						</select>
+                    </div>
+					<div class="col">
+						<button type="submit" class="btn btn-sm btn-danger mt-4">Cari</button>
+					</div>
+                </div>
+            </form>
+			<a href="{{ route('laporan.index') }}" class="btn btn-sm btn-danger mt-2">All Data</a>
+			<hr>
             <div class="table-responsive">
                 <table class="table">
                     <thead class=" text-primary text-center">
@@ -22,19 +49,16 @@
                             #
                         </th>
                         <th>
-                            Peminjam
+                            User
                         </th>
                         <th>
                             Buku
                         </th>
                         <th>
-                            Created At
-                        </th>
-                        <th>
                             Status
                         </th>
                         <th>
-                            Action
+                            Tanggal
                         </th>
                     </thead>
                     <tbody class="text-center">
@@ -50,28 +74,10 @@
                                     {{ $dt->buku_r->judul }}
                                 </td>
                                 <td>
-                                    {{ date('d-m-Y', strtotime($dt->created_at)) }}
+                                    {{ $dt->status_r->name }}
                                 </td>
                                 <td>
-                                   @if ($dt->status == 1)
-                                       <span class="badge badge-success">Disetujui</span>
-                                   @elseif ($dt->status == 2)   
-                                         <span class="badge badge-danger">Ditolak</span>    
-                                    @else
-                                    <span class="badge badge-warning">Belum Disetujui</span>                         
-                                   @endif
-                                </td>
-                                <td>
-                                    @if ($dt->status == null)
-                                        <a href="{{ route('setujui.peminjaman', $dt->id) }}"
-                                            class="btn btn-sm btn-success"><i
-                                                class="material-icons">check</i></a>
-                                        <a href="{{ route('tolak.peminjaman', $dt->id) }}"
-                                            class="btn btn-sm btn-danger">X</a>
-                                    @elseif ($dt->status == 1 || $dt->status == 2)
-                                        <a href="{{ route('batalkan.peminjaman', $dt->id) }}"
-                                            class="btn btn-sm btn-danger">Batalkan</a>
-                                    @endif
+                                    {{ date('d-m-Y', strtotime($dt->tanggal)) }}
                                 </td>
                             </tr>
                         @endforeach

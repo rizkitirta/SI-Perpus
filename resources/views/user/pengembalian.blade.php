@@ -9,6 +9,7 @@
         </div>
     @endif
 
+    <a href="javascript:history.back()" class="btn btn-sm">Back</a>
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title "></h4>
@@ -57,7 +58,7 @@
                                 <td>
                                     <a href="{{ route('pengembalian.buku', $dt->id) }}"
                                         class="btn btn-sm btn-primary {{ $dt->status == 3 ? 'disabled' : '' }}">Kembalikan</a>
-									<a href="{{ route('hapus.riwayat', $dt->id) }}"
+                                    <a href="{{ route('hapus.riwayat', $dt->id) }}"
                                         class="btn btn-sm btn-default {{ $dt->status == 1 ? 'disabled' : '' }}">Delete</a>
                                 </td>
                             </tr>

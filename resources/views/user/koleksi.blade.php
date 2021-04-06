@@ -41,7 +41,7 @@
                         </th>
                         <th>
                             Status
-						</th>
+                        </th>
                         <th class="text-center">
                             Action
                         </th>
@@ -55,7 +55,7 @@
                                 <td>
                                     <img src="{{ asset('uploads/' . $book->gambar) }}" alt="gambar" style="width: 70px">
                                 </td>
-                                
+
                                 <td>
                                     {{ $book->judul }}
                                 </td>
@@ -67,11 +67,10 @@
                                         class="badge {{ $book->status == 1 ? 'badge-success' : 'badge-danger' }}">{{ $book->status == 1 ? 'Aktive' : 'Non Active' }}</span>
                                 </td>
                                 <td class="text-center">
-                                  
+
                                     <a href="{{ route('pinjam.buku', $book->id) }}"
                                         class="btn btn-sm btn-success 
-                                        {{ $book->stock < 1 || $book->status < 1 ? 'disabled' : '' }}">Pinjam</a>
-                                
+                                           {{ $book->stock < 1 || $book->status < 1 ? 'disabled' : '' }}">Pinjam</a>
                                 </td>
                             </tr>
                         @endforeach

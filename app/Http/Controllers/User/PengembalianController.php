@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buku;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Peminjaman;
 
 class PengembalianController extends Controller
@@ -11,9 +12,9 @@ class PengembalianController extends Controller
     public function index()
     {
         $breadcrumb = 'Pengembalian';
-        $data = Peminjaman::whereIN('status', [1, 3])->get();
+        $data = Peminjaman::whereIN('status', [1, 3])->where('user',Auth::user()->id)->get();
 
-        return view('admin.pengembalian.index', compact('breadcrumb', 'data'));
+        return view('user.pengembalian', compact('breadcrumb', 'data'));
     }
 
     public function pengembalian($id)
