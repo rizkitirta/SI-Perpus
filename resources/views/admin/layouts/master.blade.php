@@ -39,7 +39,7 @@ The above copyright notice and this permission notice shall be included in all c
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     @if (Auth::user()->status == 1)
-                        <li class="nav-item {{ Request::path() == 'admin/dashboard' ? 'active' : '' }} ">
+                        <li class="nav-item {{ Request::path() == 'admin' ? 'active' : '' }} ">
                             <a class="nav-link" href="{{ route('dashboard') }}">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
@@ -77,26 +77,26 @@ The above copyright notice and this permission notice shall be included in all c
                         </li>
 
                     @else
-                        <li class="nav-item ">
+                        <li class="nav-item {{ Request::path() == 'user' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('user.index') }}">
                                 <i class="material-icons">home</i>
                                 <p>Home</p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ Request::path() == 'user/index/my-book' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('user.mybook') }}">
-                                <i class="material-icons">book</i>
+                                <i class="material-icons">category</i>
                                 <p>Buku Saya</p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ Request::path() == 'user/index/koleksi-buku' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('user.peminjaman') }}">
                                 <i class="material-icons">book</i>
                                 <p>Peminjaman</p>
 
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ Request::path() == 'user/pengembalian-buku' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('pengembalian.index') }}">
                                 <i class="material-icons">book</i>
                                 <p>Pengembalian</p>
