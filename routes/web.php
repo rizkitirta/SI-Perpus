@@ -10,28 +10,26 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Auth::routes();
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Auth::routes();
+Route::prefix('user')->group(function () {
+    Route::get('/', 'User\UserController@index')->name('user.index');
 
-Route::middleware(['IsUser'])->group(function () {
-    Route::prefix('user')->group(function () {
-        Route::get('index', 'User\UserController@index')->name('user.index');
+    Route::middleware(['IsUser'])->group(function () {
         Route::get('index/my-book', 'User\UserController@mybook')->name('user.mybook');
-
         Route::get('index/koleksi-buku', 'User\UserController@peminjaman')->name('user.peminjaman');
         Route::get('/peminjaman/{id}', 'User\UserController@Pinjam_Buku')->name('pinjam.buku');
-
         Route::get('pengembalian-buku', 'User\PengembalianController@index')->name('pengembalian.index');
         Route::get('pengembalian-buku/{id}', 'User\PengembalianController@pengembalian')->name('pengembalian.buku');
         Route::get('pengembalian-buku/delete/{id}', 'User\PengembalianController@clear_riwayat')->name('hapus.riwayat');
 
     });
-});
 
+});
 
 Route::middleware(['IsAdmin'])->group(function () {
 

@@ -12,6 +12,10 @@ class UserController extends Controller
 {
     public function index()
     {
+        if(Auth::user()->status == 1) {
+            return redirect(route('dashboard'));
+        }
+        
         $breadcrumb = 'User';
         $mybook = Peminjaman::where('user', Auth::user()->id)->count();
         $totalBuku = Buku::count();

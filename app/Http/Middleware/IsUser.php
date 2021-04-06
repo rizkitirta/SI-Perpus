@@ -20,6 +20,6 @@ class IsUser
             return $next($request);
         }
 
-        return back();
+        return redirect('admin');
     }
 }
